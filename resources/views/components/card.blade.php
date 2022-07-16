@@ -2,7 +2,7 @@
     <img src="{{asset('storage/'.$room->snap)}}" alt="hotel image" srcset="">
     <div class="card-info">
         <div class="card-title">
-            <h4><a href="/view/{{$room->hotelID}}">{{$room->company_name}}</a></h4>
+            <h4><a href="/view/{{$room->ID}}">{{$room->name}}</a></h4>
             <p>{{$room->Rating}} <i class="uil uil-favorite"></i></p>
         </div>
         <p>location: <span>{{$room->location}}</span></p>

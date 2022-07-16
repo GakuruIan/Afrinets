@@ -7,6 +7,7 @@
     <title>Afrinets</title>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link rel="stylesheet" href="/CSS/style.css">
+    <script src="//unpkg.com/alpinejs" defer></script>
     {{-- <link rel="stylesheet" href="./css/app.css"> --}}
 </head>
 <body>

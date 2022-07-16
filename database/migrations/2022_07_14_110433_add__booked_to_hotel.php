@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
-            $table->id('hotelID');
-            $table->string('hotelEmail')->unique();
-            $table->string('password');
+        Schema::table('hotel', function (Blueprint $table) {
+            $table->boolean("Booked");
         });
     }
 
@@ -27,6 +25,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::table('hotel', function (Blueprint $table) {
+            //drop column incase of rollback
+            $table->$table->dropColumn('Booked');
+        });
     }
 };

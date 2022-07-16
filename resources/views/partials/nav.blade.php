@@ -4,7 +4,7 @@
         <h1>Afrinets</h1>
     </div>
     <div class="search">
-        <form action="" method="post">
+        <form action="\search" method="">
             <input type="text" name="search" id="search" placeholder="search">
             <div>
                 <button><i class="uil uil-search"></i></button>
@@ -14,8 +14,9 @@
     <div class="menu">
         <ul>
             @auth
-            <li><a href="#">{{auth()->user()->company_name}}</a></li>
-            <li><a href="#">Dashboard</a></li>
+          
+            <span>  {{auth()->user()->hotelEmail}}</span>
+            <li><a href="/dashboard/{{auth()->user()->hotelID}}">Dashboard</a></li>
                <li><a href="/logout">Logout</a></li>
             <a href="/createRoom"> <button class="btn">Post<i class="uil uil-plus"></i></button></a>
             @else

@@ -15,7 +15,7 @@
         {{-- right view --}}
         <div class="hotel_details">
             <div class="hotel_wrapper">
-                <h1>{{$room[0]->company_name}}</h1>
+                <h1>{{$room[0]->name}}</h1>
                 <div class="info">
                     <h4>Location:</h4>
                     <p>{{$room[0]->location}}</p>
@@ -34,7 +34,7 @@
                  {{--end of amenities section --}}
 
                  {{-- booking button --}}
-                 <a href="/booking/{{$room[0]->hotelID}}">
+                 <a href="/booking/{{$room[0]->ID}}">
                     <button class="btn btn-primary btn-lg">Book</button>
                  </a>
                  {{-- enf of booking button  --}}

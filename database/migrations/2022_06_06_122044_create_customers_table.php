@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
+
         Schema::create('customers', function (Blueprint $table) {
             $table->id('customerID');
-            $table->integer('hotelID');
+            $table->unsignedBigInteger('hotelID');
+            $table->foreign('hotelID')->references('hotelID')->on('companies')->onDelete('cascade');
             $table->string('name');
             $table->string('email');
             $table->integer('nationalID');

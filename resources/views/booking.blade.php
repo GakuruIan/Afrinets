@@ -51,4 +51,5 @@
                 </form>
             </div>     
     </div>
+    <x-flash-message />
 @endsection

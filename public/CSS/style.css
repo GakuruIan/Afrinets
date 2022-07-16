@@ -211,6 +211,9 @@ body{
     width: 100%;
     height:calc(100vh - 50px);
 }
+.update{
+    height: calc(100vh - 30px);
+}
 .sign{
     margin:20px 0px;
 }
@@ -299,26 +302,11 @@ textarea
     color:rgb(248, 70, 70);
     font-size: 12px;
 }
-.radios{
-    display: flex;
-    flex-direction: column;
+.form_group img{
+    height: 60px;
+    object-fit: cover;
 }
-.payment{
-    display: flex;
-    width: 100%;
-    margin:4px 0px;
-}
-.radio{
-    display: flex;
-    width: 100%;
-    transition: 0.7s;
-}
-.radio input:hover{
-    cursor: pointer;
-}
-.radio input{
-    width: 30%;
-}
+
 .ml{
     margin: 0px 8px;
 } .btn{
@@ -547,13 +535,34 @@ textarea
     text-align: center;
     border-bottom: 1px solid #eee;
 }
-.table tbody tr:hover{
+.table tbody .hoverable:hover{
     cursor: pointer;
     background: rgba(0, 0, 255, 0.86);
 }
-.table tbody tr:hover td{
+.table tbody .hoverable:hover td{
     color:#fff;
 }
+.table tbody .non-hoverable{
+  cursor: pointer;
+}
+.table tbody .non-hoverable td img{
+    height: 45px;
+    object-fit: cover;
+}
+/* table buttons */
+ .btn-edit,
+ .btn-delete{
+    width: 100px;
+ }
+ .btn-delete{
+    background-color: rgba(255, 0, 0, 0.733);
+ }
+ .btn-delete:hover{
+    background: red;
+ }
+
+/* end of table buttons */
+
 /*end dash content */
 
 /* end of dashboard */

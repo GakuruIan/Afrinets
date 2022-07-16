@@ -12,16 +12,16 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
-      
+    {      
         Schema::create('hotel', function (Blueprint $table) {
-            $table->id('hotelID');
-            $table->integer('companyID');
+            $table->id('ID');
+            $table->string('name')->unique();
+            $table->unsignedBigInteger('hotelID');
+            $table->foreign('hotelID')->references('hotelID')->on('companies')->onDelete('cascade');
             $table->string('location');
             $table->string('amenities');
             $table->integer('Rating');
             $table->integer('pricing');
-            $table->string('roomDetails');
             $table->string('snap');
         });
     }

@@ -15,7 +15,8 @@ class ListingController extends Controller
     //List all the hotels
     public function index(){
         return view('index',[
-            'Rooms'=>DB::table('hotel')->join('companies','hotel.companyID' ,'=', 'companies.companyID')
+            'Rooms'=>DB::table('hotel')
+            ->select('*')
              ->get()
        ]);
     }
@@ -34,13 +35,13 @@ class ListingController extends Controller
     public function renderRoom(){
         return view('hotel');
     }
-
-    public function renderDash(){
-        return view('dash',['Info'=>DB::table('customers')->join('companies','customers.hotelID','companies.companyID')
-        ->get()
-    ]);
+    //render UpdateForm
+    public function updateForm(Hotel $id){
+        return view('update',['info'=>$id]);
     }
 
+    
+    //logout function
     public function logout(Request $request){
           auth()->logout();
 
@@ -50,10 +51,23 @@ class ListingController extends Controller
           return redirect('/')->with('message',"You have been logged out");
     }
 
+    //search function
+    public function search(Request $request){
+       $search=$request['search'];
+       $rooms=DB::table('hotel')
+       ->select("*")
+       ->where('hotel.name' ,'like','%'.$search .'%')
+        ->get();
+        if(count($rooms)>0)
+           return view('index',['Rooms'=>$rooms]);
+        else
+            return redirect('/')->with('message',"No record of your search");    
+    }
+
     //login user
     public function Login(Request $request){
         $formFields=$request->validate([
-            'companyEmail'=>'required|email',
+            'hotelEmail'=>'required|email',
             'password'=>'required|min:8'
         ]);
 
@@ -61,14 +75,13 @@ class ListingController extends Controller
             $request->session()->regenerate();
             return redirect('/')->with('message','Login successfull');
         }
-        return  back()->withErrors(['companyEmail'=>'Invalid Credentials'])->onlyInput('companyEmail');
+        return  back()->withErrors(['hotelEmail'=>'Invalid Credentials'])->onlyInput('hotelEmail');
     }
-    //storing company
-    public function storeCompany(Request $request){
+
+    //storing hotel Credentails
+    public function storeHotel(Request $request){
     $formFields=$request->validate([
-        'company_name'=>'required',
-        'companyEmail'=>['required','email',Rule::unique('companies','companyEmail')],
-        'location'=>'required',
+        'hotelEmail'=>['required','email',Rule::unique('companies','hotelEmail')],
         'password'=>'required|confirmed|min:8'
     ]);
     $formFields['password']=bcrypt($formFields['password']);
@@ -82,13 +95,14 @@ class ListingController extends Controller
 
     //Adding Room
    public function storeRoom(Request $request){
+    // dd($request);
     $formFields=$request->validate([
-    'companyID'=>'required',
+    'hotelID'=>'required',
+    'name'=>['required',Rule::unique('hotel','name')],
     'location'=>'required',
     'rating'=>'required',
     'amenities'=>'required',
-    'pricing'=>'required',
-    'roomDetails'=>'required'
+    'pricing'=>'required'
    ]);
    $formFields['snap']=$request->file('snap')->store('snaps','public');
    Hotel::create($formFields);
@@ -107,7 +121,44 @@ class ListingController extends Controller
          'checkout'=>'required',
         'checkin'=>'required'
      ]);
-     Customer::create($formFields);
-     return redirect('/')->with('message','Your Room has been Reserved');
+     $customer=Customer::create($formFields);
+     if($customer->exists){
+         return redirect('/')->with('message','Your Room has been Reserved');
+     }else{
+        return back()->with('message','An error occurred');
+     }
+   }
+   
+   //update
+   public function update(Request $request,Hotel $hotel){
+    //Ensuring logged in user is the owner
+     if($hotel->hotelID != auth()->id()){
+             abort(403,"Unauthorized");
+     }
+
+    $formFields=$request->validate([
+        'ID'=>'required',
+        'location'=>'required',
+        'rating'=>'required',
+        'amenities'=>'required',
+        'pricing'=>'required'
+       ]);
+       if($request->hasFile('snap')){
+          
+       }
+       $formFields['snap']=$request->file('snap')->store('snaps','public');
+       $hotel->update($formFields);
+    
+       return back()->with('message','Room Updated Successfully');
+   }
+
+   //delete function
+   public function delete(Hotel $hotel){
+     //Ensuring logged in user is the owner
+     if($hotel->hotelID != auth()->id()){
+        abort(403,"Unauthorized");
+      }
+     $hotel->delete();
+     return back()->with('message','Room Deleted Successfully');
    }
 }

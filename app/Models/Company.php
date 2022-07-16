@@ -8,14 +8,21 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Company extends Authenticatable
 {
+    use HasFactory;
     protected $table='companies';
-    protected $primaryKey = 'companyID';
+    protected $primaryKey = 'hotelID';
     protected $fillable =[
-        'company_name',
-        'companyEmail',
-        'location',
+        'hotelEmail',
         'password'
     ];
     public $timestamps = false;
-    use HasFactory;
+    
+    public function hotel(){
+        return $this->hasMany(Hotel::class,'hotelID');
+    }
+
+    public function customer(){
+        return $this->hasMany(Customer::class,'hotelID');
+    }
+
 }

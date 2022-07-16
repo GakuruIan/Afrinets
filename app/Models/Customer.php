@@ -18,4 +18,9 @@ class Customer extends Model
     ];
     public $timestamps = false;
     use HasFactory;
+
+    //relationship to company
+    public function company(){
+      return $this->belongsTo(Company::class,'hotelID');
+  }
 }

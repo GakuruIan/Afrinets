@@ -9,10 +9,10 @@
             <form action="/login/auth" method="post">
                 {{ csrf_field() }}
                 <div class="form_group">
-                    <label for="companyEmail">Company Email</label>
-                    <input type="email" name="companyEmail" id="companyEmail" class="form_control" placeholder="company@gmail.com" value="{{old('companyEmail')}}">
+                    <label for="hotelEmail">Company Email</label>
+                    <input type="email" name="hotelEmail" id="hotelEmail" class="form_control" placeholder="hotel@gmail.com" value="{{old('hotelEmail')}}">
                     <span class="muted_text">We will not share you Email</span>
-                    @error('companyEmail')
+                    @error('hotelEmail')
                     <span class="muted_text">{{$message}}</span>
                     @enderror
                 </div>

@@ -22,30 +22,42 @@ Route::get('/', [ListingController::class,'index']);
 
 Route::get('/booking/{id}', function(Hotel $id){
    return view('booking',['id'=> $id->hotelID]);
-});
+})->middleware('guest');
 
 Route::get('/view/{id}',function($id){
-   return view('view',['room'=> DB::table('hotel')->join('companies','hotel.companyID','=','companies.companyID')
-   ->select('hotel.*','companies.company_name')
-   ->where('hotel.hotelID' ,'=' ,$id)
+   return view('view',['room'=> DB::table('hotel')
+   ->select('hotel.*')
+   ->where('hotel.ID' ,'=' ,$id)
    ->get()]);
 
-});
-Route::get('/login', [ListingController::class,'renderLogin']);
+})->middleware('guest');
+Route::get('/login', [ListingController::class,'renderLogin'])->name('login')->middleware('guest');
 
-Route::get('/signup',[ListingController::class,'renderSignup']);
+Route::get('/signup',[ListingController::class,'renderSignup'])->middleware('guest');
 
-Route::get('/createRoom',[ListingController::class,'renderRoom']);
+Route::get('/createRoom',[ListingController::class,'renderRoom'])->middleware('auth');
 
-Route::get('/logout',[ListingController::class,'logout']);
+Route::get('/logout',[ListingController::class,'logout'])->middleware('auth');
 
-Route::get('/dashboard',[ListingController::class,'renderDash']);
+Route::get('/dashboard/{id}',function($id){
+    return view('booktable',['Info'=>auth()->user()->customer()->get()]);
+})->middleware('auth');
 
+Route::get('/dashboard/rooms/{id}',function($id){
+        return view('roomstable',['Info'=>auth()->user()->hotel()->get()]);
+})->middleware('auth');
 
-Route::post('/booking',[ListingController::class,'book']);
-Route::post('/register',[ListingController::class,'storeCompany']);
-Route::post('/createRoom',[ListingController::class,'storeRoom']);
+Route::get('/edit/{id}',[ListingController::class,'updateForm'])->middleware('auth');
+Route::get('/search',[ListingController::class,'search'])->middleware('guest');
+
+Route::post('/booking',[ListingController::class,'book'])->middleware('guest');
+Route::post('/register',[ListingController::class,'storeHotel'])->middleware('guest');
+Route::post('/createRoom',[ListingController::class,'storeRoom'])->middleware('auth');
 Route::post('/login/auth',[ListingController::class,'Login']);
+
+Route::put('/update/{hotel}',[ListingController::class,'update'])->middleware('auth');
+
+Route::delete('/delete/{hotel}',[ListingController::class,'delete'])->middleware('auth');
 
 // Route::get('/profile', function () {
 //    return response('<h1>profile page</h1>',200)
