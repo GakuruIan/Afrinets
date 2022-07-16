@@ -1,11 +1,13 @@
+# Afrinets
+
 ## About Afrinets
 
-Afrinets is website built using Laravel framework. Its a hotel booking website.
+Afrinets is a hotel booking website built using laravel framework.
 
 ## Resources
 
 Resources used to build are:
 
-1. Alpine js.
+1. Alpine js - https://alpinejs.dev/.
 2. Laravel Framework
 3. tinker

@@ -20,13 +20,10 @@ class ListingController extends Controller
              ->get()
        ]);
     }
-
-
     //render login page
     public function renderLogin(){
         return view('Login');
     }
-
     //render signup
     public function renderSignup(){
         return view('signup');
@@ -39,15 +36,16 @@ class ListingController extends Controller
     public function updateForm(Hotel $id){
         return view('update',['info'=>$id]);
     }
+    //render Reset Page
+    public function renderAccount(Company $id){
+        return view('Reset',['Info'=>$id]);
+    }
 
-    
     //logout function
     public function logout(Request $request){
           auth()->logout();
-
           $request->session()->invalidate();
           $request->session()->regenerateToken();
-
           return redirect('/')->with('message',"You have been logged out");
     }
 
@@ -90,7 +88,7 @@ class ListingController extends Controller
     //auth
     auth()->login($company);
 
-    return redirect('/login')->with('message','Account created successfully!!!');
+    return redirect('/')->with('message','Account created successfully!!!');
     }
 
     //Adding Room
@@ -151,6 +149,23 @@ class ListingController extends Controller
     
        return back()->with('message','Room Updated Successfully');
    }
+
+   //Reset function
+    public function reset(Request $request,Company $company){
+        //Ensuring logged in user is the owner
+     if($company->hotelID != auth()->id()){
+        abort(403,"Unauthorized");
+        }
+        $formFields=$request->validate([
+            'hotelEmail'=>['required','email'],
+            'password'=>'required|confirmed|min:8'
+        ]);
+        $formFields['password']=bcrypt($formFields['password']);
+    
+        $company->update($formFields);
+        
+        return back()->with('message','Account Updated successfully!!!');
+    }
 
    //delete function
    public function delete(Hotel $hotel){

@@ -37,6 +37,8 @@ Route::get('/signup',[ListingController::class,'renderSignup'])->middleware('gue
 
 Route::get('/createRoom',[ListingController::class,'renderRoom'])->middleware('auth');
 
+Route::get('/dashboard/Account/{id}',[ListingController::class,'renderAccount'])->middleware('auth');
+
 Route::get('/logout',[ListingController::class,'logout'])->middleware('auth');
 
 Route::get('/dashboard/{id}',function($id){
@@ -53,9 +55,10 @@ Route::get('/search',[ListingController::class,'search'])->middleware('guest');
 Route::post('/booking',[ListingController::class,'book'])->middleware('guest');
 Route::post('/register',[ListingController::class,'storeHotel'])->middleware('guest');
 Route::post('/createRoom',[ListingController::class,'storeRoom'])->middleware('auth');
-Route::post('/login/auth',[ListingController::class,'Login']);
+Route::post('/login/auth',[ListingController::class,'Login'])->middleware('guest');
 
 Route::put('/update/{hotel}',[ListingController::class,'update'])->middleware('auth');
+Route::put('/reset/{company}',[ListingController::class,'reset'])->middleware('auth');
 
 Route::delete('/delete/{hotel}',[ListingController::class,'delete'])->middleware('auth');
 
