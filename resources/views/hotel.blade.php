@@ -1,9 +1,9 @@
 @extends('layout')
-
+{{-- form for adding a room --}}
 @section('content')
 @include('partials.nav')
     <div class="book_page create">
-            <div class="form_container">
+            <div class="form_container form-sm">
                 <header class="title">Hotel</header>
                 <form action="/createRoom" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}

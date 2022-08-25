@@ -15,10 +15,10 @@
         <ul>
             @auth
           
-            <span>  {{auth()->user()->hotelEmail}}</span>
+            <span class="sm">  {{auth()->user()->hotelEmail}}</span>
             <li><a href="/dashboard/{{auth()->user()->hotelID}}">Dashboard</a></li>
                <li><a href="/logout">Logout</a></li>
-            <a href="/createRoom"> <button class="btn">Post<i class="uil uil-plus"></i></button></a>
+           <li> <a href="/createRoom"> <button class="btn icon-btn"><i class="uil uil-plus"></i> Post</button></a></li>
             @else
             <li><a href="/">Home</a></li>
             <li><a href="#">Recent</a></li>

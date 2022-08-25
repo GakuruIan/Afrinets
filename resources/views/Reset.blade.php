@@ -2,7 +2,7 @@
 
 @section('tablecontent')
 @include('partials/dashnav')
-
+{{-- form for reseting account details --}}
 <div class="book_page sign">
     <div class="form_container">
         <header class="title">Reset Credentails</header>

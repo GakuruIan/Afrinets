@@ -54,6 +54,7 @@ body{
     align-items: center;
     width: 100%;
     border-bottom: 1px solid #eee;
+    grid-gap:20px;
 }
 .navbar h1{
     font-size: 1.2rem;
@@ -92,6 +93,9 @@ body{
     color:blue;
     font-size: 1rem;
 }
+.icon-btn{
+    width:100px;
+}
 .menu{
     justify-self: end;
     display: flex;
@@ -121,6 +125,7 @@ body{
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     border-radius: 3px;
     color: #111;
+    width:80px;
 }
 .menu ul .btn i{
     color:blue;
@@ -344,7 +349,7 @@ textarea
 }
 /* left side view */
 .hotel_img{
-    flex:0.4;
+    flex:0.5;
     width: 100%;
     height: 100%;
 }
@@ -361,7 +366,7 @@ textarea
 
 /* right side view */
 .hotel_details{
-    flex:0.6;
+    flex:0.5;
     width: 100%;
     height: 100%;
     margin:0px 12px;
@@ -524,7 +529,9 @@ textarea
     padding: 12px 0px;
     color:white;
     background: blue;
-
+    text-align: start;
+    font-weight: 400;
+    font-size: 1rem;
 }
 .table tbody{
     width: 100%;
@@ -532,12 +539,13 @@ textarea
 .table tbody tr td{
     height: 50px;
     padding: 10px 0px;
-    text-align: center;
+    text-align: start;
     border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
 }
 .table tbody .hoverable:hover{
     cursor: pointer;
-    background: rgba(0, 0, 255, 0.86);
+    background: rgba(60, 60, 255, 0.96);
 }
 .table tbody .hoverable:hover td{
     color:#fff;
@@ -568,3 +576,180 @@ textarea
 /* end of dashboard */
 
 /* media queries */
+@media screen and (max-width:940px){
+    .topbar{
+        display: flex;
+        justify-content: space-between;
+    }
+    .navbar{
+        grid-template-columns: repeat(2,1fr);
+        border: none;
+        padding-top: 6px;
+    }
+    .search{
+        order:3;
+        grid-column: span 2;
+        width: 100%;
+    }
+    .search form{
+        max-width: 100%;
+        margin:10px 0px;
+   }  
+    .navbar{
+        grid-gap:5px;
+    }
+}
+@media screen and (max-width:880px) {
+    .view{
+        flex-direction: column;
+    }
+    .img_container{
+        height: 45vh;
+    }    
+    .hotel_details{
+        padding: 0;
+        margin:0;
+    }
+    .btn-lg{
+        width: 100%;
+    }
+}
+@media screen and (max-width:750px){
+.dash li a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+}
+@media screen and (max-width:680px){
+    .topbar,.intro,p{
+        font-size: 0.8rem;
+    }
+    .filter-bar{
+        max-width: 680px;
+        overflow-x: scroll;
+        padding: 8px 0px;
+    }
+    .filter-bar::-webkit-scrollbar{
+        display: none;
+    }
+    .filter-bar > div{
+        margin:0px 6px;
+        width:100%;
+    }
+    .dashbar{
+        width:100%;
+        display: grid;
+        grid-template-columns: repeat(7,1fr);
+    }
+    .dashbar li{
+        width: 100%;
+        margin:0px 6px;
+    }
+    .dashbar  li a{
+        width: 100%;
+        font-size: 0.8rem;
+    }
+    .listings{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    }
+    .mobile-hide{
+        display: none;
+    }
+    .table thead tr th{
+        font-weight: 400;
+        text-align: start;
+    }
+    .table thead tr{
+        font-size: 1rem;
+        font-weight: 400;
+    }
+    .table tbody tr{
+        font-size: 0.8rem;
+    }
+    .table tbody tr td{
+        text-align: start;
+    }
+    .table thead tr .action{
+        text-align: center;
+       }
+}
+@media screen and (max-width:520px) {
+    .bar{
+        max-width: 520px;
+        overflow-x: scroll;
+    }
+    .bar::-webkit-scrollbar{
+        display: none;
+    }
+    .dashbar{
+        display: grid;
+        grid-template-columns: repeat(7,72px);
+    }
+    .menu ul li a,
+    .menu ul li span{
+        font-size: 0.9rem;
+    }
+}
+@media screen and (max-width:470px){
+.sm{
+    display: none;
+}
+}
+
+@media screen and (max-width:430px){
+    .listings{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    }
+    .book_page{
+        height: 100%;
+    }  
+    .form_container{
+        width: 100vw;
+        box-shadow: none;
+        justify-content: space-evenly;
+        height: 450px;
+    }
+    .form-sm{
+        height: 100%;
+    }
+    .form_container .title{
+        background: none;
+        color:#222;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: underline;
+    }
+    .form_group textarea{
+        max-height: 90px;
+        min-height: 40px;
+        max-width: 380px;
+        min-width:150px;
+    }
+    .form_group label{
+        font-size: 0.9rem;
+    }
+   .table thead tr .action{
+    text-align: center;
+   }
+
+   .btn-edit,
+ .btn-delete{
+    padding: 6px 8px;
+    width: 55px;
+    font-size: 0.9rem;
+ }
+ .title h3{
+    font-size: 1.6rem;
+ }
+ header{
+    font-size: 1.8rem;
+ }
+ .more_img .grid_box{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,85px);
+}
+}

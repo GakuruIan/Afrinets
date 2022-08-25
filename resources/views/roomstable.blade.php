@@ -2,23 +2,24 @@
 
 @section('tablecontent')
 @include('partials/dashnav')
+{{-- table for listing all the rooms --}}
 <table class="table">
     <thead>
         <tr>
-            <th>HotelID</th>
+            <th class="mobile-hide">HotelID</th>
             <th>Image</th>
-            <th>Ratings</th>
-            <th>Location</th>
+            <th class="sm">Ratings</th>
+            <th class="action">Location</th>
             <th>pricing</th>
-            <th>Action</th>
+            <th class="action">Action</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($Info as $info)
         <tr class="non-hoverable">
-            <td>{{$info->hotelID}}</td>
+            <td class="mobile-hide">{{$info->hotelID}}</td>
             <td><img src={{URL::asset('storage/'.$info->snap)}} alt="hotelimage"></td>
-            <td>{{$info->Rating}}</td>
+            <td class="sm">{{$info->Rating}}</td>
             <td>{{$info->location}}</td>
             <td>{{$info->pricing}}</td>
             <td>

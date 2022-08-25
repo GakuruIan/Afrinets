@@ -1,5 +1,5 @@
 @extends('layout')
-
+{{-- form for booking a hotel --}}
 @section('content')
 @include('partials.nav')
     <div class="book_page">

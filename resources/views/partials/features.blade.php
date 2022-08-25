@@ -47,7 +47,7 @@
             </div>
             <div>
                 <i class="uil uil-award"></i>
-                 <p>Our Ratings</p>
+                 <p>Ratings</p>
             </div>
         </div>
          {{-- end filter bar --}}

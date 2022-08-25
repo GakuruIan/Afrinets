@@ -2,8 +2,9 @@
 
 @section('tablecontent')
 @include('partials/dashnav')
+{{-- form for updating room details --}}
 <div class="book_page update">
-    <div class="form_container">
+    <div class="form_container form-sm">
         <header class="title">
             <h3>Update Room</h3>
         </header>
